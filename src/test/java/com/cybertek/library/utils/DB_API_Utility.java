@@ -1,8 +1,6 @@
 package com.cybertek.library.utils;
 
 import io.restassured.http.ContentType;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,27 +19,9 @@ public class DB_API_Utility {
   public static String librarianToken;
   public static String studentToken;
 
-  @BeforeClass
-  public static void init() {
-    // API configuration
-    baseURI = ConfigurationReader.getProperty("library1.api.base-url");
-    basePath = ConfigurationReader.getProperty("library1.api.base_path");
-//    librarianToken = getToken(
-//            ConfigurationReader.getProperty("librarian69"),
-//            ConfigurationReader.getProperty("librarian69Passwd")
-//    );
-//    studentToken = getToken(
-//            ConfigurationReader.getProperty("student133"),
-//            ConfigurationReader.getProperty("student133Password")
-//    );
-    // DB connection
-    createConnection();
-  }
 
-  @AfterClass
   public static void cleanup() {
-    // close API
-    reset();
+
     // close DB
     destroy();
   }
@@ -67,7 +47,14 @@ public class DB_API_Utility {
     String url = ConfigurationReader.getProperty("library1.database.url");
     String username = ConfigurationReader.getProperty("library1.database.username");
     String password = ConfigurationReader.getProperty("library1.database.password");
-    createConnection(url, username, password);
+
+    try {
+      con = DriverManager.getConnection(url, username, password);
+      stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      System.out.println("DB connection successful!");
+    } catch (SQLException e) {
+      System.out.println("Connection has FAILED! " + e.getMessage());
+    }
 
   }
 
@@ -441,4 +428,13 @@ public class DB_API_Utility {
     return allRowLstOfMap;
 
   }
+
+  public static void sleep(int seconds) {
+    try {
+      Thread.sleep(seconds * 1000L);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
 }

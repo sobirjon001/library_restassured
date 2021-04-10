@@ -27,8 +27,8 @@ public class User implements Variables {
   private String end_date;
   private String address;
 
-  public static User student1 = new User();
-  public static User librarian1 = new User();
+  public static User student1;
+  public static User librarian1;
   public static List<User> users = new ArrayList<>();
 
   public static User getRandomUser(String userType) {

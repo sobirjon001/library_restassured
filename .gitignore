@@ -1,1 +1,4 @@
 /.idea/
+/target/
+/library_restassured.iml
+/Reports/

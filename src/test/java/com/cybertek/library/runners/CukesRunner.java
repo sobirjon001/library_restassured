@@ -6,10 +6,11 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
+        strict = true,
         plugin = {
                 "html:target/cucumber-report.html",
                 "rerun:target/rerun.txt",
-                "json:target/report.json"
+                "json:target/cucumber-report.json"
         },
         features = "src/test/resources/features",
         glue = "com/cybertek/library/step_definitions",
