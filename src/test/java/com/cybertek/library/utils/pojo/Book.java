@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter
 @Getter
 @ToString
@@ -12,5 +15,12 @@ import lombok.ToString;
 public class Book {
   private String name;
   private String isbn;
-  private int year;
+  private String year;
+  private String author;
+  private String category;
+  //private String description;
+
+  public static Book book1;
+  public static Book book2;
+  public static List<Book> books = new ArrayList<>();
 }

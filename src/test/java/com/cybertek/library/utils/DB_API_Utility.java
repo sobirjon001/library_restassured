@@ -19,13 +19,6 @@ public class DB_API_Utility {
   public static String librarianToken;
   public static String studentToken;
 
-
-  public static void cleanup() {
-
-    // close DB
-    destroy();
-  }
-
   public static String getToken(String email, String password) {
     return given()
             .contentType(ContentType.URLENC)

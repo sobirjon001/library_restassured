@@ -28,12 +28,13 @@ Feature: 1 Add user end point test
 
 # UI: login as some one
 # UI:  open any book may be this one: The kite runner
+# DB: get book id from books DB with given book info
 # UI, API:   verify that book information matches the response from  /get_book_by_id/{id}  endpoint
-#  where is the database?
-  @wip
+  @db @wip
   Scenario: verify book information using get_book_by_id endpoint
     Given I am on the "qa1_url" login page
     When I login as a "librarian"
     And I navigate to "Books" page
     When I search for book "Loralee" and create POJO
+    And I find book id from DB by info from book POJO
     Then book information must match the api for book "Loralee"

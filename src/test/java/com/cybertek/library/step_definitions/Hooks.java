@@ -21,11 +21,21 @@ public class Hooks {
             ConfigurationReader.getProperty("librarian66Password")
     );
   }
+  @Before(value = "@db")
+  public void connect_DB() {
+    // connect to DB
+    DB_API_Utility.createConnection();
+  }
 
   @After(value = "@api", order = 1)
   public void destroyAPI(){
     // close API
     reset();
+  }
+
+  @After(value = "@db", order = 1)
+  public void destroyDB() {
+    DB_API_Utility.destroy();
   }
 
   @After(order = 2)
